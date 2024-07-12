@@ -32,6 +32,8 @@ function! previm#open(preview_html_file) abort
     endif
     let path = substitute(path,' ','%20','g')
     call s:apply_openbrowser('file:///' . path)
+  elseif exists("g:loaded_netrwPlugin") && g:loaded_netrwPlugin != 1 && !(exists("g:loaded_netrw") && g:loaded_netrw == 1)
+    call netrw#BrowseX(a:preview_html_file, 0)
   else
     call s:echo_err('Command for the open can not be found. show detail :h previm#open')
   endif
